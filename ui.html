@@ -1,0 +1,249 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 方向 */
+  .direction {
+    width: 72px;
+    display: flex;
+    flex-wrap: wrap;
+    float: left;
+    padding: 10px 20px;
+  }
+
+  .direction_choosebox {
+    /* 20+2+2=24 *3= */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin: 1px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .direction_choosebox:hover {
+    background-color: #dddddd
+  }
+
+  /* 坐标值 */
+  .transform {
+    float: left;
+    width: 50%
+  }
+
+  .transform_label {
+    width: 20px;
+    text-align: left;
+    display: inline-block;
+  }
+
+  .transform_label::after {
+    display: inline-block;
+    content: ": "
+  }
+
+  /* 按钮控件 */
+  .control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  input[name=direction_choose] {
+    display: none
+  }
+
+  input[name=direction_choose]:checked+* {
+    background-color: black
+  }
+
+  input[type=text] {
+    width: 50%;
+    border: 0px solid transparent;
+    /* border-bottom: 1px solid #dddddd; */
+  }
+
+  input[type=text]:disabled {
+    background-color: white;
+  }
+
+  /* 按钮样式 */
+  button {
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px dashed black;
+    transition: all .1s ease-in-out;
+  }
+
+  button:active {
+    transform: scale(0.9);
+  }
+
+  /* 复制按钮 */
+  a {
+    color: red;
+    font-size: 12px;
+  }
+
+  a:hover {
+    color: black;
+  }
+</style>
+<!-- <h3>坐标位置:</h3> -->
+<div class="direction">
+  <input type="radio" name="direction_choose" id="direction_choose_lefttop" value="lefttop" checked="true">
+  <label for="direction_choose_lefttop" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_top" value="top">
+  <label for="direction_choose_top" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_righttop" value="righttop">
+  <label for="direction_choose_righttop" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_left" value="left">
+  <label for="direction_choose_left" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_center" value="center">
+  <label for="direction_choose_center" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_right" value="right">
+  <label for="direction_choose_right" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_leftbottom" value="leftbottom">
+  <label for="direction_choose_leftbottom" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_bottom" value="bottom">
+  <label for="direction_choose_bottom" class="direction_choosebox"></label>
+  <input type="radio" name="direction_choose" id="direction_choose_rightbottom" value="rightbottom">
+  <label for="direction_choose_rightbottom" class="direction_choosebox"></label>
+</div>
+<!-- 坐标值 -->
+<div class="transform">
+  <label class="transform_label" for="transform_x">x</label>
+  <input type="text" id="transform_x" value="0" disabled>
+  <!-- <a href="#">复制</a> -->
+  <br />
+  <label class="transform_label" for="transform_y">y</label>
+  <input type="text" id="transform_y" value="0" disabled>
+  <!-- <a href="#">复制</a> -->
+  <br />
+  <label class="transform_label" for="transform_w">w</label>
+  <input type="text" id="transform_w" value="0" disabled>
+  <!-- <a href="#">复制</a> -->
+  <br />
+  <label class="transform_label" for="transform_h">h</label>
+  <input type="text" id="transform_h" value="0" disabled>
+  <!-- <a href="#">复制</a> -->
+</div>
+<!-- 控件 -->
+<div class="control">
+  <button id="btn_image">图片</button>
+  <button id="btn_button">按钮</button>
+</div>
+
+<script>
+  let obj = {
+    direction: "lefttop",
+  }
+  // obj.definePropetity()
+  window.onload = function () {
+    // document.getElementsByName("direction_choose").forEach(node => {
+    //   node.checked ? obj.direction = node.value : 0
+    // })
+    obj.x = document.getElementById("transform_x")
+    obj.y = document.getElementById("transform_y")
+    obj.w = document.getElementById("transform_w")
+    obj.h = document.getElementById("transform_h")
+    document.getElementsByName("direction_choose").forEach(node => {
+      node.addEventListener("click", function () {
+        obj.direction = node.value
+        update()
+      })
+    })
+  }
+
+  document.getElementById("btn_image").onclick = function () {
+    let str = `x="${obj.x.value}" y="${obj.y.value}"`
+    obj.str ? str += obj.str : undefined
+    copy(str)
+  }
+  document.getElementById("btn_button").onclick = function () {
+    copy(`x="${data.x}" y="${data.y}" w="${data.w}" h=${data.h}`)
+  }
+  function copy(content) {
+    let copy = (e) => {
+      e.preventDefault()
+      e.clipboardData.setData('text/plain', content)
+      document.removeEventListener('copy', copy)
+    }
+    document.addEventListener('copy', copy)
+    document.execCommand("Copy");
+  }
+
+  // console.log(obj)
+
+  let data = {
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0
+  }
+  onmessage = event => {
+    data = event.data.pluginMessage
+    // console.log()
+    update()
+  }
+
+  function update() {
+    obj.w.value = Math.floor(data.w)
+    obj.h.value = Math.floor(data.h)
+    switch (obj.direction) {
+      case "lefttop":
+        obj.x.value = Math.floor(data.x)
+        obj.y.value = Math.floor(data.y)
+        obj.str = undefined
+        break
+      case "top":
+        obj.x.value = Math.floor(data.x + data.w / 2)
+        obj.y.value = Math.floor(data.y)
+        obj.str = ` align="center"`
+        break
+      case "righttop":
+        obj.x.value = Math.floor(data.x + data.w)
+        obj.y.value = Math.floor(data.y)
+        obj.str = ` align="right"`
+        break
+      case "left":
+        obj.x.value = Math.floor(data.x)
+        obj.y.value = Math.floor(data.y + data.h / 2)
+        obj.str = ` align="left" alignV="center"`
+        break
+      case "center":
+        obj.x.value = Math.floor(data.x + data.w / 2)
+        obj.y.value = Math.floor(data.y + data.h / 2)
+        obj.str = ` align="center" alignV="center"`
+        break
+      case "right":
+        obj.x.value = Math.floor(data.x + data.w)
+        obj.y.value = Math.floor(data.y + data.h / 2)
+        obj.str = ` align="right" alignV="center"`
+        break
+      case "leftbottom":
+        obj.x.value = Math.floor(data.x)
+        obj.y.value = Math.floor(data.y + data.h)
+        obj.str = ` align="left" alignV="bottom"`
+        break
+      case "bottom":
+        obj.x.value = Math.floor(data.x + data.w / 2)
+        obj.y.value = Math.floor(data.y + data.h)
+        obj.str = ` align="center" alignV="bottom"`
+        break
+      case "rightbottom":
+        obj.x.value = Math.floor(data.x + data.w)
+        obj.y.value = Math.floor(data.y + data.h)
+        obj.str = ` align="right" alignV="bottom"`
+        break
+    }
+  }
+
+
+</script>

@@ -1,0 +1,10 @@
+{
+  "name": "坐标",
+  "id": "1178877638247911521",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": [
+    "figma"
+  ],
+  "ui": "ui.html"
+}
