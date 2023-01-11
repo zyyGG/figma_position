@@ -169,6 +169,8 @@
   document.getElementById("btn_button").onclick = function () {
     copy(`x="${data.x}" y="${data.y}" w="${data.w}" h="${data.h}"`)
   }
+
+  // 复制文本到剪切板
   function copy(content) {
     let copy = (e) => {
       e.preventDefault()
@@ -193,56 +195,62 @@
     update()
   }
 
+  // 对页面数据进行修改
   function update() {
-    obj.w.value = Math.floor(data.w)
-    obj.h.value = Math.floor(data.h)
+    obj.w.value = numberSort(data.w)
+    obj.h.value = numberSort(data.h)
     switch (obj.direction) {
       case "lefttop":
-        obj.x.value = Math.floor(data.x)
-        obj.y.value = Math.floor(data.y)
+        obj.x.value = numberSort(data.x)
+        obj.y.value = numberSort(data.y)
         obj.str = undefined
         break
       case "top":
-        obj.x.value = Math.floor(data.x + data.w / 2)
-        obj.y.value = Math.floor(data.y)
+        obj.x.value = numberSort(data.x + data.w / 2)
+        obj.y.value = numberSort(data.y)
         obj.str = ` align="center"`
         break
       case "righttop":
-        obj.x.value = Math.floor(data.x + data.w)
-        obj.y.value = Math.floor(data.y)
+        obj.x.value = numberSort(data.x + data.w)
+        obj.y.value = numberSort(data.y)
         obj.str = ` align="right"`
         break
       case "left":
-        obj.x.value = Math.floor(data.x)
-        obj.y.value = Math.floor(data.y + data.h / 2)
+        obj.x.value = numberSort(data.x)
+        obj.y.value = numberSort(data.y + data.h / 2)
         obj.str = ` align="left" alignV="center"`
         break
       case "center":
-        obj.x.value = Math.floor(data.x + data.w / 2)
-        obj.y.value = Math.floor(data.y + data.h / 2)
+        obj.x.value = numberSort(data.x + data.w / 2)
+        obj.y.value = numberSort(data.y + data.h / 2)
         obj.str = ` align="center" alignV="center"`
         break
       case "right":
-        obj.x.value = Math.floor(data.x + data.w)
-        obj.y.value = Math.floor(data.y + data.h / 2)
+        obj.x.value = numberSort(data.x + data.w)
+        obj.y.value = numberSort(data.y + data.h / 2)
         obj.str = ` align="right" alignV="center"`
         break
       case "leftbottom":
-        obj.x.value = Math.floor(data.x)
-        obj.y.value = Math.floor(data.y + data.h)
+        obj.x.value = numberSort(data.x)
+        obj.y.value = numberSort(data.y + data.h)
         obj.str = ` align="left" alignV="bottom"`
         break
       case "bottom":
-        obj.x.value = Math.floor(data.x + data.w / 2)
-        obj.y.value = Math.floor(data.y + data.h)
+        obj.x.value = numberSort(data.x + data.w / 2)
+        obj.y.value = numberSort(data.y + data.h)
         obj.str = ` align="center" alignV="bottom"`
         break
       case "rightbottom":
-        obj.x.value = Math.floor(data.x + data.w)
-        obj.y.value = Math.floor(data.y + data.h)
+        obj.x.value = numberSort(data.x + data.w)
+        obj.y.value = numberSort(data.y + data.h)
         obj.str = ` align="right" alignV="bottom"`
         break
     }
+  }
+
+  // 计算数字是否需要保留小数位
+  function numberSort(number) {
+    return (/\./).test(number) ? number.toFixed(1) : number
   }
 
 
