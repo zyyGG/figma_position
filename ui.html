@@ -4,43 +4,88 @@
     padding: 0;
   }
 
-  /* 方向 */
+  /* 第一行样式 */
+  .first_line {
+    /* width: 100%; */
+    display: inline-flex;
+  }
+
+  /* 选择方向 */
   .direction {
-    width: 72px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    float: left;
+
     padding: 10px 20px;
   }
 
-  .direction_choosebox {
-    /* 20+2+2=24 *3= */
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    margin: 1px;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .direction_choosebox:hover {
-    background-color: #dddddd
+  /* 每列的元素 */
+  .direction_col {
+    display: flex;
+    flex-wrap: nowrap;
   }
 
   /* 坐标值 */
   .transform {
-    float: left;
-    width: 50%
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
+
+  /* 值的对齐 */
+  .transform_col {
+    display: flex;
+    align-items: baseline;
+  }
+
+  /* 方向 */
+  /* .direction { */
+  /* box-sizing: border-box; */
+  /* width: 72px; */
+  /* height: 72px; */
+  /* display: flex; */
+  /* justify-items: flex-start; */
+  /* flex-direction: row; */
+  /* flex: 1; */
+  /* flex-wrap: wrap; */
+  /* padding: 10px 20px; */
+  /* }  */
+
+  .direction_choosebox {
+    /* 20+2+2=24 *3= */
+    /* display: inline; */
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin: 1px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .direction_choosebox:hover {
+    background-color: #cccccc
+  }
+
+  /* 坐标值 */
+  /* .transform { */
+  /* display: inline-flex; */
+  /* flex-direction: column; */
+  /* justify-items: flex-start; */
+  /* float: left; */
+  /* width: 50% */
+  /* } */
+
+
 
   .transform_label {
     width: 20px;
     text-align: left;
     display: inline-block;
+    /* 测试用 */
+    /* outline: 1px solid black; */
   }
 
   .transform_label::after {
-    display: inline-block;
+    display: inline;
     content: ": "
   }
 
@@ -49,8 +94,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: calc(100% - 20px);
-    position: absolute;
+    /* padding: 10px 0; */
+    /* width: calc(100% - 20px); */
+    /* position: absolute; */
     bottom: 10px;
     left: 10px;
   }
@@ -60,13 +106,15 @@
   }
 
   input[name=direction_choose]:checked+* {
-    background-color: black
+    background-color: #3e3e3e
   }
 
   input[type=text] {
-    width: 50%;
+    width: 50px;
+    overflow: hidden;
     border: 0px solid transparent;
-    /* border-bottom: 1px solid #dddddd; */
+    /* 测试用 */
+    /* outline: 1px solid black; */
   }
 
   input[type=text]:disabled {
@@ -78,67 +126,92 @@
     padding: 10px 20px;
     background-color: white;
     border: 1px dashed black;
+    border-radius: 10%;
     transition: all .1s ease-in-out;
   }
 
+  /* 按钮点击样式 */
   button:active {
-    transform: scale(0.9);
+    background-color: #eeeeee
+  }
+
+  /* 按钮划过样式 */
+  button:hover {
+    border: 1px solid black;
+
   }
 
   /* 复制按钮 */
   a {
-    color: red;
+    color: rgb(2, 167, 227);
     font-size: 12px;
+    margin-left: 2px;
   }
 
   a:hover {
     color: black;
   }
 </style>
-<!-- <h3>坐标位置:</h3> -->
-<div class="direction">
-  <input type="radio" name="direction_choose" id="direction_choose_lefttop" value="lefttop" checked="true">
-  <label for="direction_choose_lefttop" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_top" value="top">
-  <label for="direction_choose_top" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_righttop" value="righttop">
-  <label for="direction_choose_righttop" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_left" value="left">
-  <label for="direction_choose_left" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_center" value="center">
-  <label for="direction_choose_center" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_right" value="right">
-  <label for="direction_choose_right" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_leftbottom" value="leftbottom">
-  <label for="direction_choose_leftbottom" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_bottom" value="bottom">
-  <label for="direction_choose_bottom" class="direction_choosebox"></label>
-  <input type="radio" name="direction_choose" id="direction_choose_rightbottom" value="rightbottom">
-  <label for="direction_choose_rightbottom" class="direction_choosebox"></label>
-</div>
-<!-- 坐标值 -->
-<div class="transform">
-  <label class="transform_label" for="transform_x">x</label>
-  <input type="text" id="transform_x" value="0" disabled>
-  <!-- <a href="#">复制</a> -->
-  <br />
-  <label class="transform_label" for="transform_y">y</label>
-  <input type="text" id="transform_y" value="0" disabled>
-  <!-- <a href="#">复制</a> -->
-  <br />
-  <label class="transform_label" for="transform_w">w</label>
-  <input type="text" id="transform_w" value="0" disabled>
-  <!-- <a href="#">复制</a> -->
-  <br />
-  <label class="transform_label" for="transform_h">h</label>
-  <input type="text" id="transform_h" value="0" disabled>
-  <!-- <a href="#">复制</a> -->
+<!-- 第一行 -->
+<div class="first_line">
+  <!-- <h3>坐标位置:</h3> -->
+  <div class="direction">
+    <div class="direction_col">
+      <input type="radio" name="direction_choose" id="direction_choose_lefttop" value="lefttop" checked="true">
+      <label for="direction_choose_lefttop" class="direction_choosebox"></label>
+      <input type="radio" name="direction_choose" id="direction_choose_top" value="top">
+      <label for="direction_choose_top" class="direction_choosebox"></label>
+      <input type="radio" name="direction_choose" id="direction_choose_righttop" value="righttop">
+      <label for="direction_choose_righttop" class="direction_choosebox"></label>
+    </div>
+    <div class="direction_col">
+      <input type="radio" name="direction_choose" id="direction_choose_left" value="left">
+      <label for="direction_choose_left" class="direction_choosebox"></label>
+      <input type="radio" name="direction_choose" id="direction_choose_center" value="center">
+      <label for="direction_choose_center" class="direction_choosebox"></label>
+      <input type="radio" name="direction_choose" id="direction_choose_right" value="right">
+      <label for="direction_choose_right" class="direction_choosebox"></label>
+    </div>
+    <div class="direction_col">
+      <input type="radio" name="direction_choose" id="direction_choose_leftbottom" value="leftbottom">
+      <label for="direction_choose_leftbottom" class="direction_choosebox"></label>
+      <input type="radio" name="direction_choose" id="direction_choose_bottom" value="bottom">
+      <label for="direction_choose_bottom" class="direction_choosebox"></label>
+      <input type="radio" name="direction_choose" id="direction_choose_rightbottom" value="rightbottom">
+      <label for="direction_choose_rightbottom" class="direction_choosebox"></label>
+    </div>
+  </div>
+  <!-- 坐标值 -->
+  <div class="transform">
+    <div class="transform_col">
+      <label class="transform_label" for="transform_x">x</label>
+      <input type="text" id="transform_x" value="0" disabled>
+      <a href="#">复制</a>
+    </div>
+    <div class="transform_col">
+      <label class="transform_label" for="transform_y">y</label>
+      <input type="text" id="transform_y" value="0" disabled>
+      <a href="#">复制</a>
+    </div>
+    <div class="transform_col">
+      <label class="transform_label" for="transform_w">w</label>
+      <input type="text" id="transform_w" value="0" disabled>
+      <a href="#">复制</a>
+    </div>
+    <div class="transform_col">
+      <label class="transform_label" for="transform_h">h</label>
+      <input type="text" id="transform_h" value="0" disabled>
+      <a href="#">复制</a>
+    </div>
+  </div>
 </div>
 <!-- 控件 -->
 <div class="control">
   <button id="btn_image">图片</button>
   <button id="btn_button">按钮</button>
 </div>
+</div>
+
 
 <script>
   let obj = {

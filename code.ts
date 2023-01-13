@@ -1,7 +1,7 @@
 
 figma.showUI(__html__, {
-  width: 230,
-  height: 150,
+  width: 230,//230
+  height: 150,//150
   title: "坐标",
   // position: { x: 0, y: 200 }  
 });
