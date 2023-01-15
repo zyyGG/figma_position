@@ -92,13 +92,9 @@
   /* 按钮控件 */
   .control {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* padding: 10px 0; */
-    /* width: calc(100% - 20px); */
-    /* position: absolute; */
-    bottom: 10px;
-    left: 10px;
+    justify-content: space-around;
+    margin: 0px 10px;
+    align-items: flex-end;
   }
 
   input[name=direction_choose] {
@@ -113,8 +109,6 @@
     width: 50px;
     overflow: hidden;
     border: 0px solid transparent;
-    /* 测试用 */
-    /* outline: 1px solid black; */
   }
 
   input[type=text]:disabled {
@@ -127,7 +121,7 @@
     background-color: white;
     border: 1px dashed black;
     border-radius: 10%;
-    transition: all .1s ease-in-out;
+    /* transition: all .2s ease-in-out; */
   }
 
   /* 按钮点击样式 */
@@ -138,7 +132,6 @@
   /* 按钮划过样式 */
   button:hover {
     border: 1px solid black;
-
   }
 
   /* 复制按钮 */
@@ -150,6 +143,7 @@
 
   a:hover {
     color: black;
+    cursor: pointer;
   }
 </style>
 <!-- 第一行 -->
@@ -186,28 +180,33 @@
     <div class="transform_col">
       <label class="transform_label" for="transform_x">x</label>
       <input type="text" id="transform_x" value="0" disabled>
-      <a href="#">复制</a>
+      <a onclick="copySingle('x')">复制</a>
     </div>
     <div class="transform_col">
       <label class="transform_label" for="transform_y">y</label>
       <input type="text" id="transform_y" value="0" disabled>
-      <a href="#">复制</a>
+      <a onclick="copySingle('y')">复制</a>
     </div>
     <div class="transform_col">
       <label class="transform_label" for="transform_w">w</label>
       <input type="text" id="transform_w" value="0" disabled>
-      <a href="#">复制</a>
+      <a onclick="copySingle('w')">复制</a>
     </div>
     <div class="transform_col">
       <label class="transform_label" for="transform_h">h</label>
       <input type="text" id="transform_h" value="0" disabled>
-      <a href="#">复制</a>
+      <a onclick="copySingle('h')">复制</a>
     </div>
   </div>
 </div>
 <!-- 控件 -->
 <div class="control">
   <button id="btn_image">图片</button>
+  <span id="moreMenu">
+    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 5L-3.98116e-07 -1.49012e-07L10 -1.49012e-07L5 5Z" fill="black" />
+    </svg>
+  </span>
   <button id="btn_button">按钮</button>
 </div>
 </div>
@@ -241,6 +240,28 @@
   }
   document.getElementById("btn_button").onclick = function () {
     copy(`x="${data.x}" y="${data.y}" w="${data.w}" h="${data.h}"`)
+  }
+  // 更多菜单
+  document.getElementById("moreMenu").onclick = function () {
+
+  }
+
+  // 复制单个属性
+  function copySingle(type) {
+    switch (type) {
+      case "x":
+        copy(obj.x.value)
+        break
+      case "y":
+        copy(obj.y.value)
+        break
+      case "w":
+        copy(obj.w.value)
+        break
+      case "h":
+        copy(obj.h.value)
+        break
+    }
   }
 
   // 复制文本到剪切板
