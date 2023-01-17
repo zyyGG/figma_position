@@ -202,11 +202,11 @@
 <!-- 控件 -->
 <div class="control">
   <button id="btn_image">图片</button>
-  <span id="moreMenu">
+  <div class="moremenu">
     <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M5 5L-3.98116e-07 -1.49012e-07L10 -1.49012e-07L5 5Z" fill="black" />
     </svg>
-  </span>
+  </div>
   <button id="btn_button">按钮</button>
 </div>
 </div>
@@ -241,10 +241,6 @@
   document.getElementById("btn_button").onclick = function () {
     copy(`x="${data.x}" y="${data.y}" w="${data.w}" h="${data.h}"`)
   }
-  // 更多菜单
-  document.getElementById("moreMenu").onclick = function () {
-
-  }
 
   // 复制单个属性
   function copySingle(type) {
@@ -263,6 +259,12 @@
         break
     }
   }
+  let data = {
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0
+  }
 
   // 复制文本到剪切板
   function copy(content) {
@@ -277,15 +279,9 @@
 
   // console.log(obj)
 
-  let data = {
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0
-  }
+
   onmessage = event => {
     data = event.data.pluginMessage
-    // console.log()
     update()
   }
 
