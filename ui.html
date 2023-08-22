@@ -1,218 +1,109 @@
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-  }
+<script src="./ui.js"></script>
 
-  /* 第一行样式 */
-  .first_line {
-    /* width: 100%; */
-    display: inline-flex;
-  }
-
-  /* 选择方向 */
-  .direction {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    padding: 10px 20px;
-  }
-
-  /* 每列的元素 */
-  .direction_col {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  /* 坐标值 */
-  .transform {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-
-  /* 值的对齐 */
-  .transform_col {
-    display: flex;
-    align-items: baseline;
-  }
-
-  /* 方向 */
-  /* .direction { */
-  /* box-sizing: border-box; */
-  /* width: 72px; */
-  /* height: 72px; */
-  /* display: flex; */
-  /* justify-items: flex-start; */
-  /* flex-direction: row; */
-  /* flex: 1; */
-  /* flex-wrap: wrap; */
-  /* padding: 10px 20px; */
-  /* }  */
-
-  .direction_choosebox {
-    /* 20+2+2=24 *3= */
-    /* display: inline; */
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    margin: 1px;
-    transition: all 0.2s ease-in-out;
-  }
-
-  .direction_choosebox:hover {
-    background-color: #cccccc
-  }
-
-  /* 坐标值 */
-  /* .transform { */
-  /* display: inline-flex; */
-  /* flex-direction: column; */
-  /* justify-items: flex-start; */
-  /* float: left; */
-  /* width: 50% */
-  /* } */
-
-
-
-  .transform_label {
-    width: 20px;
-    text-align: left;
-    display: inline-block;
-    /* 测试用 */
-    /* outline: 1px solid black; */
-  }
-
-  .transform_label::after {
-    display: inline;
-    content: ": "
-  }
-
-  /* 按钮控件 */
-  .control {
-    display: flex;
-    justify-content: space-around;
-    margin: 0px 10px;
-    align-items: flex-end;
-  }
-
-  input[name=direction_choose] {
-    display: none
-  }
-
-  input[name=direction_choose]:checked+* {
-    background-color: #3e3e3e
-  }
-
-  input[type=text] {
-    width: 50px;
-    overflow: hidden;
-    border: 0px solid transparent;
-  }
-
-  input[type=text]:disabled {
-    background-color: white;
-  }
-
-  /* 按钮样式 */
-  button {
-    padding: 10px 20px;
-    background-color: white;
-    border: 1px dashed black;
-    border-radius: 10%;
-    /* transition: all .2s ease-in-out; */
-  }
-
-  /* 按钮点击样式 */
-  button:active {
-    background-color: #eeeeee
-  }
-
-  /* 按钮划过样式 */
-  button:hover {
-    border: 1px solid black;
-  }
-
-  /* 复制按钮 */
-  a {
-    color: rgb(2, 167, 227);
-    font-size: 12px;
-    margin-left: 2px;
-  }
-
-  a:hover {
-    color: black;
-    cursor: pointer;
-  }
-</style>
-<!-- 第一行 -->
-<div class="first_line">
-  <!-- <h3>坐标位置:</h3> -->
-  <div class="direction">
-    <div class="direction_col">
-      <input type="radio" name="direction_choose" id="direction_choose_lefttop" value="lefttop" checked="true">
-      <label for="direction_choose_lefttop" class="direction_choosebox"></label>
-      <input type="radio" name="direction_choose" id="direction_choose_top" value="top">
-      <label for="direction_choose_top" class="direction_choosebox"></label>
-      <input type="radio" name="direction_choose" id="direction_choose_righttop" value="righttop">
-      <label for="direction_choose_righttop" class="direction_choosebox"></label>
+<!-- 第一页 -->
+<div id="page1">
+  <!-- 第一行 -->
+  <div class="first_line">
+    <!-- <h3>坐标位置:</h3> -->
+    <div class="direction">
+      <div class="direction_col">
+        <input type="radio" name="direction_choose" id="direction_choose_lefttop" value="lefttop" checked="true">
+        <label for="direction_choose_lefttop" class="direction_choosebox"></label>
+        <input type="radio" name="direction_choose" id="direction_choose_top" value="top">
+        <label for="direction_choose_top" class="direction_choosebox"></label>
+        <input type="radio" name="direction_choose" id="direction_choose_righttop" value="righttop">
+        <label for="direction_choose_righttop" class="direction_choosebox"></label>
+      </div>
+      <div class="direction_col">
+        <input type="radio" name="direction_choose" id="direction_choose_left" value="left">
+        <label for="direction_choose_left" class="direction_choosebox"></label>
+        <input type="radio" name="direction_choose" id="direction_choose_center" value="center">
+        <label for="direction_choose_center" class="direction_choosebox"></label>
+        <input type="radio" name="direction_choose" id="direction_choose_right" value="right">
+        <label for="direction_choose_right" class="direction_choosebox"></label>
+      </div>
+      <div class="direction_col">
+        <input type="radio" name="direction_choose" id="direction_choose_leftbottom" value="leftbottom">
+        <label for="direction_choose_leftbottom" class="direction_choosebox"></label>
+        <input type="radio" name="direction_choose" id="direction_choose_bottom" value="bottom">
+        <label for="direction_choose_bottom" class="direction_choosebox"></label>
+        <input type="radio" name="direction_choose" id="direction_choose_rightbottom" value="rightbottom">
+        <label for="direction_choose_rightbottom" class="direction_choosebox"></label>
+      </div>
     </div>
-    <div class="direction_col">
-      <input type="radio" name="direction_choose" id="direction_choose_left" value="left">
-      <label for="direction_choose_left" class="direction_choosebox"></label>
-      <input type="radio" name="direction_choose" id="direction_choose_center" value="center">
-      <label for="direction_choose_center" class="direction_choosebox"></label>
-      <input type="radio" name="direction_choose" id="direction_choose_right" value="right">
-      <label for="direction_choose_right" class="direction_choosebox"></label>
-    </div>
-    <div class="direction_col">
-      <input type="radio" name="direction_choose" id="direction_choose_leftbottom" value="leftbottom">
-      <label for="direction_choose_leftbottom" class="direction_choosebox"></label>
-      <input type="radio" name="direction_choose" id="direction_choose_bottom" value="bottom">
-      <label for="direction_choose_bottom" class="direction_choosebox"></label>
-      <input type="radio" name="direction_choose" id="direction_choose_rightbottom" value="rightbottom">
-      <label for="direction_choose_rightbottom" class="direction_choosebox"></label>
+    <!-- 坐标值 -->
+    <div class="transform">
+      <div class="transform_col">
+        <label class="transform_label" for="transform_x">x</label>
+        <input type="text" id="transform_x" value="0" disabled>
+        <a onclick="copySingle('x')">copy</a>
+      </div>
+      <div class="transform_col">
+        <label class="transform_label" for="transform_y">y</label>
+        <input type="text" id="transform_y" value="0" disabled>
+        <a onclick="copySingle('y')">copy</a>
+      </div>
+      <div class="transform_col">
+        <label class="transform_label" for="transform_w">w</label>
+        <input type="text" id="transform_w" value="0" disabled>
+        <a onclick="copySingle('w')">copy</a>
+      </div>
+      <div class="transform_col">
+        <label class="transform_label" for="transform_h">h</label>
+        <input type="text" id="transform_h" value="0" disabled>
+        <a onclick="copySingle('h')">copy</a>
+      </div>
     </div>
   </div>
-  <!-- 坐标值 -->
-  <div class="transform">
-    <div class="transform_col">
-      <label class="transform_label" for="transform_x">x</label>
-      <input type="text" id="transform_x" value="0" disabled>
-      <a onclick="copySingle('x')">复制</a>
-    </div>
-    <div class="transform_col">
-      <label class="transform_label" for="transform_y">y</label>
-      <input type="text" id="transform_y" value="0" disabled>
-      <a onclick="copySingle('y')">复制</a>
-    </div>
-    <div class="transform_col">
-      <label class="transform_label" for="transform_w">w</label>
-      <input type="text" id="transform_w" value="0" disabled>
-      <a onclick="copySingle('w')">复制</a>
-    </div>
-    <div class="transform_col">
-      <label class="transform_label" for="transform_h">h</label>
-      <input type="text" id="transform_h" value="0" disabled>
-      <a onclick="copySingle('h')">复制</a>
-    </div>
+  <!-- 控件 -->
+  <div class="control">
+    <button id="buttonA" onclick="handleAClick()">COPY A</button>
+    <button id="buttonB" onclick="handleBClick()">COPY B</button>
   </div>
-</div>
-<!-- 控件 -->
-<div class="control">
-  <button id="btn_image">图片</button>
-  <div class="moremenu">
-    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 5L-3.98116e-07 -1.49012e-07L10 -1.49012e-07L5 5Z" fill="black" />
-    </svg>
-  </div>
-  <button id="btn_button">按钮</button>
-</div>
+  <!-- 更多设置 -->
+  <div
+    style="width:0;height:0;margin-top:7px;margin-inline: auto; border:5px solid transparent;border-top-color: black;cursor: pointer;"
+    ></div>
 </div>
 
+<!-- 第二页 -->
+<div id="page2" style="display: none;padding:10px;">
+  <div
+    style="width:0;height:0;position:absolute;left:50%;top:2px;transform: translateX(-50%);border:5px solid transparent;border-bottom-color: black;cursor: pointer;"
+    onclick="showPage1()"></div>
+
+  <!-- 第一个按钮的设置 -->
+  <div>
+    <div>Setting</div>
+    <div style="display: flex;align-items: center;">
+      <div>A:</div>
+      <input style="border:none;border-bottom:1px solid black;outline: none;" id="A_name"></input>
+    </div>
+    <div style="display: flex;align-items: center;">
+      <div>B:</div>
+      <input style="border:none;border-bottom:1px solid black;outline: none;" id="A_rule"></input>
+    </div>
+  </div>
+  <div></div>
+
+</div>
 
 <script>
+  let page1
+  let page2
+
+  let config = {
+    buttonA: {
+      name: "A",
+      rule: "x=\"$x$\" y=\"$y$\""
+    },
+    buttonB: {
+      name: "B",
+      rule: "x=\"$x$\" y=\"$y$\" w=\"$w$\" h=\"$h$\""
+    }
+  }
+
+
   let obj = {
     direction: "lefttop",
   }
@@ -231,16 +122,33 @@
         update()
       })
     })
+    page1 = document.querySelector("#page1")
+    page2 = document.querySelector("#page2")
   }
 
-  document.getElementById("btn_image").onclick = function () {
+
+  // 按钮A被点击的事件
+  function handleAClick() {
     let str = `x="${obj.x.value}" y="${obj.y.value}"`
     obj.str ? str += obj.str : undefined
     copy(str)
   }
-  document.getElementById("btn_button").onclick = function () {
+  // 按钮B被点击的事件
+  function handleBClick() {
     copy(`x="${data.x}" y="${data.y}" w="${data.w}" h="${data.h}"`)
   }
+
+  //
+  function showPage2() {
+    page1.style.display = "none"
+    page2.style.display = "block"
+  }
+
+  function showPage1() {
+    page1.style.display = "block"
+    page2.style.display = "none"
+  }
+
 
   // 复制单个属性
   function copySingle(type) {
@@ -342,6 +250,137 @@
   function numberSort(number) {
     return (/\./).test(number) ? number.toFixed(1) : number
   }
-
-
 </script>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 第一行样式 */
+  .first_line {
+    /* width: 100%; */
+    display: inline-flex;
+  }
+
+  /* 选择方向 */
+  .direction {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    padding: 10px 20px;
+  }
+
+  /* 每列的元素 */
+  .direction_col {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  /* 坐标值 */
+  .transform {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  /* 值的对齐 */
+  .transform_col {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .direction_choosebox {
+    /* 20+2+2=24 *3= */
+    /* display: inline; */
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin: 1px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .direction_choosebox:hover {
+    background-color: #cccccc
+  }
+
+  .transform_label {
+    width: 20px;
+    text-align: left;
+    display: inline-block;
+    /* 测试用 */
+    /* outline: 1px solid black; */
+  }
+
+  .transform_label::after {
+    display: inline;
+    content: ": "
+  }
+
+  /* 按钮控件 */
+  .control {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px 10px;
+    align-items: flex-end;
+  }
+
+  /* 更多菜单 */
+  #more {
+    position: relative;
+    top: -10px;
+
+    cursor: pointer;
+  }
+
+  input[name=direction_choose] {
+    display: none
+  }
+
+  input[name=direction_choose]:checked+* {
+    background-color: #3e3e3e
+  }
+
+  input[type=text] {
+    width: 50px;
+    overflow: hidden;
+    border: 0px solid transparent;
+  }
+
+  input[type=text]:disabled {
+    background-color: white;
+  }
+
+  /* 按钮样式 */
+  button {
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px dashed black;
+    border-radius: 10%;
+    /* transition: all .2s ease-in-out; */
+  }
+
+  /* 按钮点击样式 */
+  button:active {
+    background-color: #eeeeee
+  }
+
+  /* 按钮划过样式 */
+  button:hover {
+    border: 1px solid black;
+  }
+
+  /* 复制按钮 */
+  a {
+    color: rgb(2, 167, 227);
+    font-size: 12px;
+    margin-left: 2px;
+  }
+
+  a:hover {
+    color: black;
+    cursor: pointer;
+  }
+</style>
